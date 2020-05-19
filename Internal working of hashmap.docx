@@ -31,3 +31,16 @@ public class Map<k,v>{
 		 newelement.next=head;
 		 bucket.set(bucketindex, newelement);
 		}
+        public v getvalue(k key) {
+		int bucketindex=getbucketindex(key);
+		Mapnode<k,v> head=bucket.get(bucketindex);
+		while(head!=null) {
+			if(head.key.equals(key)) {
+				return head.value;
+				
+			}
+			head=head.next;
+		}
+		return null;
+		
+	}
