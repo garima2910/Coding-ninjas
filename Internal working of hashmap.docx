@@ -44,3 +44,26 @@ public class Map<k,v>{
 		return null;
 		
 	}
+    	public v removekey(k key) {
+		int bucketindex=getbucketindex(key);
+		Mapnode<k,v> head=bucket.get(bucketindex);
+		Mapnode<k,v> prev=null;
+		while(head!=null) {
+			if(head.key.equals(key)) {
+				if(prev==null) {
+					bucket.set(bucketindex, head.next);
+					
+				}else {
+				prev.next=head.next;
+				}
+				return head.value;
+				
+			}
+			prev=head;
+			head=head.next;
+		}
+		return null;
+		
+	}
+		
+	}
