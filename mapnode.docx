@@ -1,0 +1,14 @@
+
+public class Mapnode<k,v> {
+	k key;
+	v value;
+	Mapnode<k,v> next;
+	
+	public Mapnode(k key,v value){
+		this.key=key;
+		this.value=value;
+		
+	}
+	
+
+}
