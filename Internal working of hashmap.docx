@@ -16,3 +16,18 @@ public class Map<k,v>{
 		int hashcode=key.hashCode();
 		return hashcode%numbuckets;
 	}
+    public void insert(k key,v value) {
+		int bucketindex=getbucketindex(key);
+		Mapnode<k,v> head=bucket.get(bucketindex);
+		while(head!=null) {
+			if(head.key.equals(key)) {
+				head.value=value;
+				return;
+			}
+			head=head.next;
+		}
+		 head=bucket.get(bucketindex);
+		 Mapnode<k,v> newelement=new Mapnode<k,v>(key,value);
+		 newelement.next=head;
+		 bucket.set(bucketindex, newelement);
+		}
