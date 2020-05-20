@@ -1,0 +1,35 @@
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+
+public class Diffrentnames {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		String str=s.nextLine();
+		String[] names=str.split(" ");
+		HashMap<String,Integer> mp=new HashMap<>();
+		for(int i=0;i<names.length;i++) {
+			if(mp.containsKey(names[i])) {
+				 int tempCount = mp.get(names[i]);
+	                mp.put(names[i], tempCount + 1);
+	              
+			} else {
+				mp.put(names[i], 1);
+			}
+		}
+		for (Map.Entry<String, Integer> entry : mp.entrySet()) {
+			if(entry.getValue()==1) {
+				continue;
+			}else {
+		    System.out.println(entry.getKey()+" "+entry.getValue());
+			}
+		}
+		}
+
+	}
+
+
