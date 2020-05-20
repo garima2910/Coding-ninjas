@@ -1,0 +1,32 @@
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class Extractuniquecharacters {
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String uniChars = uniqueChar(s.next());
+		System.out.println(uniChars);
+	}
+
+	private static String uniqueChar(String str) {
+		// TODO Auto-generated method stub
+		String updatedstring="";
+		HashMap<Character,Boolean> mp=new HashMap<>();
+		for(int i=0;i<str.length();i++) {
+			if(mp.containsKey(str.charAt(i))) {
+				continue;
+			}
+				else {
+					mp.put(str.charAt(i),true );
+					updatedstring+=str.charAt(i);
+					
+				}
+			}
+		return updatedstring;
+		}
+		
+		
+	}
+
+
