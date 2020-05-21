@@ -21,3 +21,20 @@ private ArrayList<Integer> heap;
 		}
 		return heap.get(0);
 	}
+    public void insert(int element) {
+		// TODO Auto-generated method stub
+		heap.add(element);
+		int childIndex = heap.size() - 1;
+		int parentIndex = (childIndex - 1) / 2;
+		while (childIndex > 0) {
+			if (heap.get(childIndex) > heap.get(parentIndex)) {
+				int temp = heap.get(childIndex);
+				heap.set(childIndex, heap.get(parentIndex));
+				heap.set(parentIndex, temp);
+				childIndex = parentIndex;
+				parentIndex = (childIndex - 1) / 2;
+			} else {
+				return;
+			}
+		}
+	}
