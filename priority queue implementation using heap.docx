@@ -23,3 +23,19 @@ public class PriorityQueue {
 		}
 		return heap.get(0);
 	}
+    	void insert(int element) {
+		heap.add(element);
+		int childindex=heap.size()-1;
+		int parentindex=(childindex-1)/2;
+		while(childindex>0) 
+		{
+		if(heap.get(childindex)<heap.get(parentindex)) {
+			int temp=heap.get(childindex);
+			heap.set(childindex, heap.get(parentindex));
+			heap.set(parentindex, temp);
+			childindex=parentindex;
+		}else {
+			return;
+		}
+	}
+ }
