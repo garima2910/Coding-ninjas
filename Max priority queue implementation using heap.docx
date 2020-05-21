@@ -1,0 +1,23 @@
+import java.util.ArrayList;
+
+public class Priority_Queue {
+private ArrayList<Integer> heap;
+	
+	public Priority_Queue() {
+		heap = new ArrayList<>();
+	}
+	
+	public boolean isEmpty() {
+		return heap.size() == 0;
+	}
+	
+	public int getSize() {
+		return heap.size();
+	}
+	
+	public int getMax() {
+		if (isEmpty()) {
+			return Integer.MIN_VALUE;
+		}
+		return heap.get(0);
+	}
