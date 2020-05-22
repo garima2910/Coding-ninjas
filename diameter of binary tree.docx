@@ -83,7 +83,27 @@ public class Diameterofbinarytree {
 		
 	}
 	
-	
+	public static Pair<Integer,Integer> heightdiameter(BinaryTreeNode<Integer> root){
+		if(root==null) {
+			Pair<Integer,Integer> output=new Pair<>();
+			output.first=0;
+			output.second=0;
+			return output;
+		}
+		Pair<Integer,Integer> lo=heightdiameter(root.left);
+		Pair<Integer,Integer> ro=heightdiameter(root.right);
+		int height=1+Math.max(lo.first, ro.first);
+		int op1=lo.first+ro.first;
+		int op2=lo.second;
+		int op3=ro.second;
+		int diameter=Math.max(op1, Math.max(op2, op3));
+		Pair<Integer,Integer> output=new Pair<>();
+		output.first=height;
+		output.second=diameter;
+		return output;
+		
+		
+	}
 	
 	private static int height(BinaryTreeNode<Integer> root) {
 		// TODO Auto-generated method stub
@@ -100,6 +120,11 @@ public class Diameterofbinarytree {
 		BinaryTreeNode<Integer> root = takeInputLevelWise();
 		printTree(root);
 		System.out.println("diameter:" + diameter(root));
+//		better diameter calculation function with complexity of o(n)
+		System.out.println("diameter:" + heightdiameter(root).second);
+//		also printing the height of the tree 
+		System.out.println("height:"+heightdiameter(root).first);
+		
 	}
 
 	
