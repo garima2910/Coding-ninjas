@@ -1,0 +1,175 @@
+package BinarySearchTree;
+
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+class QueueEmptyException extends Exception {
+}
+
+
+class BinaryTreeNode<T> {
+	T data;
+	BinaryTreeNode<T> left;
+	BinaryTreeNode<T> right;
+
+	public BinaryTreeNode(T data) {
+		this.data = data;
+	}
+}
+
+class Node<T> {
+	T data;
+	Node<T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+class QueueUsingLL<T> {
+
+
+	private Node<T> head;
+	private Node<T> tail;
+	private int size = 0;
+
+	public int size(){
+		return size;
+	}
+
+	public boolean isEmpty(){
+		if(size == 0){
+			return true;
+		}
+		return false;
+	}
+
+	public T front() throws QueueEmptyException{
+		if(size == 0){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+
+		return head.data;
+	}
+
+
+	public void enqueue(T element){
+		Node<T> newNode = new Node<T>(element);
+
+		if(head == null){
+			head = newNode;
+			tail = newNode;
+		}
+		else{
+			tail.next = newNode;
+			tail = newNode;
+		}
+
+		size++;
+	}
+
+	public T dequeue() throws QueueEmptyException{
+		if(head == null){
+			QueueEmptyException e = new QueueEmptyException();
+			throw e;
+		}
+		if(head == tail){
+			tail = null;
+		}
+		T temp = head.data;
+		head = head.next;
+		size--;
+		return temp;
+	}
+}
+
+
+public class Constructtreefromtraversal {
+	static Scanner s = new Scanner(System.in);
+
+	public static void printLevelWiseAtDiffLine(BinaryTreeNode<Integer> root){
+		QueueUsingLL<BinaryTreeNode<Integer>>  primary = new QueueUsingLL<>();
+		QueueUsingLL<BinaryTreeNode<Integer>>  secondary = new QueueUsingLL<>();
+
+		primary.enqueue(root);
+
+		while(!primary.isEmpty()){
+			BinaryTreeNode<Integer> current=null;
+			try {
+				current = primary.dequeue();
+			} catch (QueueEmptyException e) {
+				System.out.println("Not possible");
+			}
+			System.out.print(current.data + " ");
+			if(current.left != null){
+				secondary.enqueue(current.left);
+			}
+			if(current.right != null){
+				secondary.enqueue(current.right);
+			}
+			if(primary.isEmpty()){
+				QueueUsingLL<BinaryTreeNode<Integer>>  temp = secondary;
+				secondary = primary;
+				primary = temp;
+				System.out.println();
+			}
+		}
+	}
+
+	
+	public static void main(String[] args) {
+		
+		int size = s.nextInt();
+		int[] pre = new int[size];
+		for(int i = 0; i < size; i++){
+			pre[i] = s.nextInt();
+		}
+		int in[] = new int[size];
+		for(int i = 0; i < size; i++){
+			in[i] = s.nextInt();
+		}
+		BinaryTreeNode<Integer> root = getTreeFromPostorderAndInorder(pre, in);
+		printLevelWiseAtDiffLine(root);
+		
+	}
+
+
+	private static BinaryTreeNode<Integer> getTreeFromPostorderAndInorder(int[] post, int[] in) {
+		// TODO Auto-generated method stub
+		 return getTreeFromPostAndIn(post, in, 0, post.length-1 ,0 , in.length-1);
+	        
+	}
+
+
+	private static BinaryTreeNode<Integer> getTreeFromPostAndIn(int[] post, int[] in, int posts, int postend, int ins, int inend) {
+		 if(ins>inend){
+	            return null;
+	        }
+		 int rootdata=post[postend];
+		 BinaryTreeNode<Integer> root=new BinaryTreeNode<>(rootdata);
+		 int index=0;
+		 for(int j=0;j<in.length;j++) {
+			 if(in[j]==rootdata) {
+				 index=j;
+				 break;
+			 }
+		 }
+			 int inlefts=ins;
+			 int inleftend=index-1;
+			 int inrights=index+1;
+			 int inrightend=inend;
+			 int postlefts=posts;
+			 int leftLength = inleftend-inlefts+1;
+			 int postleftend=postlefts+leftLength-1;;
+			 int postrights=postleftend+1;;
+			 int postrightend=postend;
+			 root.left=getTreeFromPostAndIn(post,in,postlefts,postleftend,inlefts,inleftend);
+			 root.right=getTreeFromPostAndIn(post,in,postrights,postrightend,inrights,inrightend);
+			 return root;
+			 
+			 
+		 }
+	}
+
