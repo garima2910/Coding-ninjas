@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Removeduplicates {
+	
+	static Scanner s = new Scanner(System.in);
+	
+	public static void main(String[] args) {
+    	String input = s.next();
+    	System.out.println(removeConsecutiveDuplicates(input));
+    }
+
+	private static String removeConsecutiveDuplicates(String input) {
+		// TODO Auto-generated method stub
+		if(input.length()<=1) {
+			return input;
+		}
+		if(input.charAt(0)==input.charAt(1)) {
+			return removeConsecutiveDuplicates(input.substring(1));
+		}
+	    
+		return input.charAt(0)+removeConsecutiveDuplicates(input.substring(1));
+	}
+}
