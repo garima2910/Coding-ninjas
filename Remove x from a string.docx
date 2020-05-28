@@ -1,0 +1,23 @@
+
+public class RemoveXrecursively {
+	
+	public static String removeX(String str) {
+		if(str.length()==0) {
+			return str;
+		}
+		String ans="";
+		if(str.charAt(0)!='x') {
+			ans=ans+str.charAt(0);
+		}
+		String updated=removeX(str.substring(1));
+		return ans+updated;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str="abxcx";
+		System.out.println(removeX(str));
+
+	}
+
+}
