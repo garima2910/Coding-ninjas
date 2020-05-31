@@ -1,0 +1,38 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Pairsumto0 {
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		int n = s.nextInt();
+		int arr[]=new int[n];
+		for(int i=0; i<n; i++)
+		{
+			arr[i]=s.nextInt();
+		}		
+		PairSum(arr, n);
+	}
+
+	private static void PairSum(int[] arr, int size) {
+		// TODO Auto-generated method stub
+		 int l=arr.length;
+	        for(int i=0;i<l;i++){
+	            for(int j=i+1;j<l;j++){
+	                if(i!=j){
+	                 int sum=arr[i]+arr[j];
+	                    if(sum==0){
+	                        if(arr[i]<arr[j]){
+	                    System.out.println(arr[i]+" "+arr[j]);
+	                        }
+	                        else{
+	                           System.out.println(arr[j]+" "+arr[i]); 
+	                        }
+	                    }
+	                }
+	            }
+	        }
+			
+		
+		
+	}
+}
