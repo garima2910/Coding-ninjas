@@ -1,0 +1,21 @@
+import java.util.Scanner;
+
+public class Summeup {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		while(t-->0) {
+			long ar=s.nextLong();
+			long sum=0;
+			while(ar!=0) {
+				sum+=ar%10;
+				ar/=10;
+			}
+			System.out.println(sum);
+		}
+	
+	}
+
+}
