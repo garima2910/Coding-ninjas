@@ -1,0 +1,26 @@
+
+public class Printsubsequences {
+	
+	public static void printsubsequences(String str) {
+		printsubsequence(str,"");
+	}
+
+	private static void printsubsequence(String str, String outputsofar) {
+		// TODO Auto-generated method stub
+		if(str.length()==0) {
+			System.out.println(outputsofar);
+			return;
+		}
+		printsubsequence(str.substring(1),outputsofar);
+		printsubsequence(str.substring(1),outputsofar+str.charAt(0));
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String str="xyz";
+		printsubsequences(str);
+
+	}
+
+}
