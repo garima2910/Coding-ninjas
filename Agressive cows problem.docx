@@ -1,0 +1,52 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Agressivecowsproblem {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		while(t-->0) {
+			int stalls=s.nextInt();
+			int cows=s.nextInt();
+			int arr[]=new int[stalls];
+			for(int i=0;i<stalls;i++) {
+				arr[i]=s.nextInt();
+			}
+			Arrays.sort(arr);
+			int start=0;
+			int end=arr[stalls-1]-arr[0];
+			int ans=-1;
+			while(end>=start) {
+				int mid=(start+end)/2;
+				if(checkdistance(arr,cows,mid)) {
+					ans=mid;
+					start=mid+1;
+				}else {
+					end=mid-1;
+				}
+			}
+			System.out.println(ans);
+			
+		}
+
+	}
+
+	private static boolean checkdistance(int[] arr, int cows, int mid) {
+		// TODO Auto-generated method stub
+		 int cowPlaced = 1;
+	        int lastPosition =arr[0];
+	        for (int i = 1; i < arr.length; i++) {
+	            if (arr[i]-lastPosition < mid)
+	                continue;
+	            if (++cowPlaced == cows)
+	                return true;
+	            lastPosition = arr[i];
+	        }
+	        return false;
+	}
+
+	
+
+}
