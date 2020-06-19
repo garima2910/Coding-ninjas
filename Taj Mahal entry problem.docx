@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class TajMahalentry {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner in = new Scanner(System.in);
+		int n=in.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<n;i++) {
+			arr[i]=in.nextInt();
+		}
+		int min_t=Integer.MAX_VALUE, min_index=-1; 
+		for(int i=0; i<n; i++)
+		{
+			int ans=0; 
+			if(arr[i]-i<0)
+			{ 
+				ans=0;
+				}
+			else
+			{ 
+				double t=((arr[i]-i)*1.0)/n;
+				t= Math.ceil(t); 
+				ans=(int)t; 
+				} 
+			//comparison 
+			if(ans<min_t)
+			{ 
+				min_t=ans; 
+				min_index=i; 
+				} 
+			} 
+		System.out.println(min_index+1);
+		}
+		
+
+	}
+
+
