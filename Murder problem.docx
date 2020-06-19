@@ -1,0 +1,137 @@
+import java.util.Scanner;
+
+public class Murder {
+//	#include<bits/stdc++.h>
+//	//#define max 100005
+//	using namespace std;
+//	typedef long long ll;
+//	ll merge(ll arr[],ll l,ll mid,ll r)
+//	{
+//	     ll i=l,j=mid,k=0;
+//	    ll count=0;
+//	    ll temp[r-l+1];
+//	    
+//	    while(i<mid && j<=r)
+//	    {
+//	        if(arr[i]<arr[j])
+//	        {
+//	            count+=(r-j+1)*arr[i];
+//	            temp[k++]=arr[i++];
+//	        }
+//	        else{
+//	            temp[k++]=arr[j++];
+//	        }
+//	    }
+//	    
+//	    while(i<mid)
+//	    temp[k++]=arr[i++];
+//	    
+//	    while(j<=r){
+//	        temp[k++]=arr[j++];
+//	    }
+//	    
+//	    for(ll t=l,k=0;t<=r;k++,t++)
+//	        arr[t]=temp[k];
+//	    
+//	    return count;
+//	}
+//	ll mergesort(ll arr[],ll l,ll r)
+//	{
+//	    ll count=0;
+//	    if(l<r){
+//	        ll mid=(l+r)/2;
+//	        ll n1=mergesort(arr,l,mid);
+//	        ll n2=mergesort(arr,mid+1,r);
+//	        ll n3=merge(arr,l,mid+1,r);
+//	        return n1+n2+n3;
+//	    }
+//	    return count;
+//	}
+//	int main() {
+//
+//		// Write your code here
+//	    ll t;
+//	    cin>>t;
+//	    while(t--)
+//	    {
+//	        ll n;
+//	        cin>>n;
+//	        
+//	        ll arr[n];
+//	        for(ll i=0;i<n;i++)
+//	            cin>>arr[i];
+//	        
+//	        ll result=mergesort(arr,0,n-1);
+//	        cout<<result<<endl;
+//	    }
+//	    return 0;
+//	}
+
+
+
+	
+	public static void main(String[] args) {
+		// Write your code here
+		Scanner scan = new Scanner(System.in);
+		int n,t;
+		t=scan.nextInt();
+		while(t-->0) {
+		n = scan.nextInt();
+		int[] A = new int[n];
+		for(int i = 0; i < n ; i++){
+			A[i] = scan.nextInt();
+		}
+		System.out.println(solve(A,n));
+	}
+	}
+	
+		
+    static long merge(int A[],int left,int mid,int right){
+
+	int i=left,j=mid,k=0;
+
+	int[] temp=new int[right-left+1];
+	 long sum = 0;
+	while(i<mid && j<=right){
+		if(A[i] < A[j]){
+			sum+=(right-j+1)*A[i];
+			temp[k++] = A[i++];
+		}else{
+			temp[k++] = A[j++];
+			
+		}
+	}
+	while(i<mid){
+		temp[k++] = A[i++];
+	}
+	while(j<=right){
+		temp[k++] = A[j++];
+	}
+
+	for( i=left,k=0;i<=right;i++,k++){
+		A[i] = temp[k];
+	}
+	return sum;
+}
+ static long merge_sort(int A[],int left,int right){
+
+	 long count = 0;
+	if(right > left){
+		int mid = (left + right)/2;
+
+		 long sumLeft = merge_sort(A,left,mid);
+		 long sumRight = merge_sort(A,mid+1,right);
+	     long sumCount = merge(A,left,mid+1,right);
+
+		return sumCount + sumLeft + sumRight;
+	}
+	return count;
+
+}
+ static long solve(int A[], int n)
+{
+	 long ans = merge_sort(A,0,n-1);
+	return ans;
+}
+}
+
