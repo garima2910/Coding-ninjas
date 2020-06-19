@@ -1,0 +1,44 @@
+import java.util.*;
+public class Momomarketproblem
+{ 
+	static int floorSearch(long arr[], int low, int high, long x) 
+	{ 
+		// If low and high cross each other
+		if (low > high) return -1;
+		// If last element is smaller than x
+		if (x >= arr[high]) return high; 
+		// Find the middle point
+		int mid = (low + high) / 2;
+		// If middle point is floor.
+		if (arr[mid] == x) return mid; 
+		// If x lies between mid-1 and mid 
+		if (mid > 0 && arr[mid - 1] <= x && x < arr[mid]) return mid - 1; 
+		// If x is smaller than mid, floor // must be in left half. 
+		if (x < arr[mid]) return floorSearch(arr, low, mid - 1, x); 
+		// If mid-1 is not floor and x is 
+		// greater than arr[mid], 
+		return floorSearch(arr, mid + 1, high, x); 
+		}
+	public static void main(String[] args) 
+	{
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt(); 
+		long[] arr = new long[n]; 
+		for (int i = 0; i < n; i++) 
+			arr[i] = in.nextLong(); 
+		long[] prefix = new long[n]; 
+		prefix[0] = arr[0]; 
+		for (int i = 1; i < n; i++) 
+			prefix[i] = prefix[i - 1] + arr[i]; 
+		int q = in.nextInt();
+		while(q-->0)
+		{ 
+			long x = in.nextLong();
+			int s = floorSearch(prefix, 0, n-1, x);
+			long val = x;
+			if(s!=-1)val-=prefix[s]; 
+			System.out.println((s+1) + " " + val);
+			}
+		}
+	}
+	
