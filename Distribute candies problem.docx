@@ -1,0 +1,50 @@
+
+import java.util.*;
+
+public class Distributecandies {
+
+	
+	public static void main(String[] args) {
+		// Write your code here
+        Scanner s=new Scanner(System.in);
+		int t=s.nextInt();
+		while(t-->0) {
+			int n=s.nextInt();
+			int k=s.nextInt();
+			int boxes[]=new int[n];
+			for(int i=0;i<n;i++) {
+				boxes[i]=s.nextInt();
+			}
+			Arrays.sort(boxes);
+			int start=1;
+			int end=boxes[n-1];
+			int ans=0;
+			while(end>=start) {
+				int mid=(start+end)/2;
+				if(check(boxes,k,mid)) {
+					ans=mid;
+					start=mid+1;
+				}else {
+					end=mid-1;
+				}
+			}
+			System.out.println(ans);
+		}
+
+	}
+
+	private static boolean check(int[] boxes, int k, int mid) {
+		// TODO Auto-generated method stub
+		int sum=0;
+		for(int j=0;j<boxes.length;j++) {
+			sum=sum+boxes[j]/mid;
+			if(sum>=k) {
+				return true;
+			}
+        }
+		return false;
+		
+	}
+
+
+	}
