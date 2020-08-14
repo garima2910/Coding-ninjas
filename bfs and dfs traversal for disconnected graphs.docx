@@ -1,0 +1,88 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class dfsandbfsfordisconnectgraph {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner s=new Scanner(System.in);
+		int v=s.nextInt();
+		int e=s.nextInt();
+		int edges[][]=new int[v][v];
+		for(int i=0;i<e;i++) {
+			int a=s.nextInt();
+			int b=s.nextInt();
+			edges[a][b]=1;
+			edges[b][a]=1;
+		}
+		System.out.println("DFS");
+		dfs(edges);
+		System.out.println("BFS");
+		bfs(edges);
+		
+
+	}
+
+	private static void bfs(int[][] edges) {
+		// TODO Auto-generated method stub
+		boolean visited[]=new boolean[edges.length];
+		for(int i=0;i<visited.length;i++) {
+			if(!visited[i]) {
+				bfs(edges,i,visited);
+			}
+		}
+		
+		
+	}
+
+	private static void bfs(int[][] edges, int sv, boolean[] visited) {
+		// TODO Auto-generated method stub
+		Queue<Integer> queue = new LinkedList<>(); 
+        visited[sv] = true;
+        queue.add(sv);
+        while(!queue.isEmpty())
+        {
+            int front = queue.remove();
+            System.out.print(front + " ");
+            for(int i = 0; i < edges.length; i++) 
+            {
+                if(edges[front][i] == 1 && !visited[i])
+                {
+                    visited[i] = true; queue.add(i);
+                }
+            }
+        }
+		
+	}
+
+	private static void dfs(int[][] edges) {
+		// TODO Auto-generated method stub
+		boolean visited[]=new boolean[edges.length];
+		for(int i=0;i<visited.length;i++) {
+			if(!visited[i]) {
+				dfs(edges,i,visited);
+			}
+		}
+		
+	}
+
+	private static void dfs(int[][] edges, int sv, boolean[] visited) {
+		// TODO Auto-generated method stub
+		System.out.println(sv);
+		visited[sv]=true;
+		for(int i=0;i<edges.length;i++) {
+			if(i==sv) {
+				continue;
+			}
+			if(edges[sv][i]==1) {
+				if(visited[i]) {
+					continue;
+				}
+				dfs(edges,i,visited);
+			}
+		}
+		
+	}
+
+}
