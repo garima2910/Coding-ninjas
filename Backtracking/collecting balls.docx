@@ -1,0 +1,40 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		long n=in.nextLong();
+		long start=1;
+		long end=n;
+		long ans=n/2;
+		while(end>=start) {
+			long mid=(start+end)/2;
+			if(check(n,mid)) {
+				ans=mid;
+				end=mid-1;
+			}else {
+				start=mid+1;
+			}
+		}
+		System.out.println(ans);
+	}
+
+
+
+private static boolean check( long n, long mid) {
+	// TODO Auto-generated method stub
+	long sum=0;
+	long curr=n;
+	while(curr>0) {
+		sum=sum+Math.min(curr, mid);
+		curr=curr-mid;
+		curr=curr-(curr/10);
+	}
+	if((2*sum)>=n) {
+		return true;
+	}
+	return false;
+}
+
+		
+	}
